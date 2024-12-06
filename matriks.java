@@ -53,7 +53,31 @@ public class matriks {
                 case 4:
                     System.out.println();
                     System.out.println("--- Invers ---");
-                    invers(matriks1, sc);
+
+                    int a;
+                    a = sc.nextInt();
+                    switch (a) {
+                        case 1:
+                                            invers(matriks1, sc);
+                        case 2:
+                        System.out.println();
+                    System.out.println("--- Invers 3 X 3---");
+                    matriks1 = new int[3][3];
+                    System.out.println("Masukkan elemen matriks 3x3:");
+                    input(sc, matriks1);
+
+                    // Konversi ke double[][] sebelum invers
+                    double[][] doubleMatriks = convertToDouble(matriks1);
+                    invers3x3(doubleMatriks);
+
+                    System.out.println("--- Hasil Invers ---");
+                    printHasil(matriksHasil);
+                    break;
+
+                        default:
+                            break;
+                    }
+
                     break;
                 case 5:
                     System.out.println();
@@ -75,6 +99,18 @@ public class matriks {
         }
     }
 
+
+    public static double[][] convertToDouble(int[][] intArray) {
+        double[][] doubleArray = new double[intArray.length][intArray[0].length];
+        for (int i = 0; i < intArray.length; i++) {
+            for (int j = 0; j < intArray[0].length; j++) {
+                doubleArray[i][j] = intArray[i][j];
+            }
+        }
+        return doubleArray;
+    }
+
+
     public static void perkalian(int[][] matriks1, int[][] matriks2, Scanner sc) {
         System.out.println("------------------------------");
         System.out.println("masukkan matriks 1: ");
@@ -93,6 +129,45 @@ public class matriks {
         }
     }
 
+
+    public static void invers3x3(double[][] matriks) {
+        if (matriks.length != 3 || matriks[0].length != 3) {
+            throw new IllegalArgumentException("Matriks harus berukuran 3x3.");
+        }
+
+        double a = matriks[0][0], b = matriks[0][1], c = matriks[0][2];
+        double d = matriks[1][0], e = matriks[1][1], f = matriks[1][2];
+        double g = matriks[2][0], h = matriks[2][1], i = matriks[2][2];
+
+        double determinan = (a * e * i + b * f * g + c * d * h)
+                - (c * e * g + a * f * h + b * d * i);
+
+        if (determinan == 0) {
+            throw new IllegalArgumentException("Matriks tidak memiliki invers (determinan nol).");
+        }
+
+        double[][] kofaktor = {
+                { e * i - f * h, -(b * i - c * h), b * f - c * e },
+                { -(d * i - f * g), a * i - c * g, -(a * f - c * d) },
+                { d * h - e * g, -(a * h - b * g), a * e - b * d }
+        };
+
+        double[][] adjoin = new double[3][3];
+        for (int j = 0; j < 3; j++) {
+            for (int k = 0; k < 3; k++) {
+                adjoin[j][k] = kofaktor[k][j];
+            }
+        }
+
+        matriksHasil = new double[3][3];
+        for (int j = 0; j < 3; j++) {
+            for (int k = 0; k < 3; k++) {
+                matriksHasil[j][k] = adjoin[j][k] / determinan;
+            }
+        }
+    }
+
+
     public static void printHasil(double[][] matriksHasil) {
         for (int i = 0; i < matriksHasil.length; i++) {
             for (int j = 0; j < matriksHasil[0].length; j++) {
@@ -101,6 +176,7 @@ public class matriks {
             System.out.println();
         }
     }
+
 
     public static void invers(int[][] matriks1, Scanner sc) {
         System.out.println("1. invers 2x2");
