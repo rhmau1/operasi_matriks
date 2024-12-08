@@ -66,44 +66,6 @@ public class matriks {
         }
     }
 
-    public static void invers(int[][] matriks1, Scanner sc) {
-        System.out.println("1. invers 2x2");
-        System.out.println("2. invers 3x3");
-        System.out.print("masukkan pilihan: ");
-        int pilih = sc.nextInt();
-        switch (pilih) {
-            case 1:
-                System.out.println("--- invers 2x2 ---");
-                System.out.println("------------------------------");
-                System.out.println("masukkan elemen matriks: ");
-                matriks1 = new int[2][2];
-                input(sc, matriks1);
-                double determinan = determinan2x2(matriks1);
-                if (determinan == 0) {
-                    System.out.println("operasi tidak dapat dilakukan karena determinan 0");
-                    return;
-                }
-                double[][] invers2 = invers2x2(matriks1, determinan);
-                System.out.println("--- Hasil Invers ---");
-                printHasil(invers2);
-                break;
-            case 2:
-                System.out.println("--- invers 3x3 ---");
-                System.out.println();
-                matriks1 = new int[3][3];
-                System.out.println("Masukkan elemen matriks 3x3:");
-                input(sc, matriks1);
-                double[][] hasil3 = invers3x3(matriks1);
-
-                System.out.println("--- Hasil Invers ---");
-                printHasil(hasil3);
-                break;
-            default:
-                System.out.println("pilihan tidak tersedia");
-                break;
-        }
-    }
-
     public static int[][] input(Scanner sc, int[][] matriks) {
         for (int i = 0; i < matriks.length; i++) {
             for (int j = 0; j < matriks[0].length; j++) {
@@ -112,16 +74,6 @@ public class matriks {
             }
         }
         return matriks;
-    }
-
-    public static double[][] convertToDouble(double[][] intArray) {
-        double[][] doubleArray = new double[intArray.length][intArray[0].length];
-        for (int i = 0; i < intArray.length; i++) {
-            for (int j = 0; j < intArray[0].length; j++) {
-                doubleArray[i][j] = intArray[i][j];
-            }
-        }
-        return doubleArray;
     }
 
     public static void perkalian(int[][] matriks1, int[][] matriks2, Scanner sc) {
@@ -142,6 +94,45 @@ public class matriks {
         }
     }
 
+    public static void invers(int[][] matriks1, Scanner sc) {
+        System.out.println("1. invers 2x2");
+        System.out.println("2. invers 3x3");
+        System.out.print("masukkan pilihan: ");
+        int pilih = sc.nextInt();
+        switch (pilih) {
+            case 1:
+                System.out.println();
+                System.out.println("--- invers 2x2 ---");
+                System.out.println("------------------");
+                System.out.println("masukkan elemen matriks: ");
+                matriks1 = new int[2][2];
+                input(sc, matriks1);
+                double determinan = determinan2x2(matriks1);
+                if (determinan == 0) {
+                    System.out.println("operasi tidak dapat dilakukan karena determinan 0");
+                    return;
+                }
+                double[][] invers2 = invers2x2(matriks1, determinan);
+                System.out.println("--- Hasil Invers ---");
+                printHasil(invers2);
+                break;
+            case 2:
+                System.out.println();
+                System.out.println("--- invers 3x3 ---");
+                System.out.println("------------------");
+                System.out.println("masukkan elemen matriks: ");
+                matriks1 = new int[3][3];
+                input(sc, matriks1);
+                double[][] hasil3 = invers3x3(matriks1);
+                System.out.println("--- Hasil Invers ---");
+                printHasil(hasil3);
+                break;
+            default:
+                System.out.println("pilihan tidak tersedia");
+                break;
+        }
+    }
+
     public static double[][] invers2x2(int[][] matriks1, double determinan) {
         double[][] invers = new double[2][2];
         invers[0][0] = matriks1[1][1] / determinan; // d
@@ -157,11 +148,6 @@ public class matriks {
     }
 
     public static double[][] invers3x3(int[][] matriks) {
-        // Validasi ukuran matriks
-        if (matriks.length != 3 || matriks[0].length != 3) {
-            System.out.println("Matriks harus berukuran 3x3.");
-            return null; // Keluar jika matriks tidak valid
-        }
 
         // Elemen matriks
         double a = matriks[0][0], b = matriks[0][1], c = matriks[0][2];
