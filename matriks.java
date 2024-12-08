@@ -39,7 +39,7 @@ public class matriks {
                     // Validasi ukuran matriks
                     if (matriks1.length != matriks2.length || matriks1[0].length != matriks2[0].length) {
                         System.out.println("Error: Dimensi matriks harus sama untuk penjumlahan!");
-                        return;
+                        break;
                     }
                     // Input matriks pertama
                     System.out.println("Masukkan elemen matriks pertama:");
@@ -50,8 +50,8 @@ public class matriks {
                     input(sc, matriks2);
 
                     System.out.println("Hasil penjumlahan matriks:");
-                    double[][] sum = addMatrices(matriks1, matriks2);
-                    printHasil(sum);
+                    addMatrices(matriks1, matriks2);
+                    printHasil(matriksHasil);
                     break;
                 case 2:
                     System.out.println();
@@ -71,7 +71,7 @@ public class matriks {
                     // Validasi ukuran matriks
                     if (matriks1.length != matriks2.length || matriks1[0].length != matriks2[0].length) {
                         System.out.println("Error: Dimensi matriks harus sama untuk pengurangan!");
-                        return;
+                        break;
                     }
 
                     // Input matriks pertama
@@ -83,8 +83,8 @@ public class matriks {
                     input(sc, matriks2);
 
                     System.out.println("Hasil penjumlahan pengurangan:");
-                    double[][] difference = subtractMatrices(matriks1, matriks2);
-                    printHasil(difference);
+                    subtractMatrices(matriks1, matriks2);
+                    printHasil(matriksHasil);
                     break;
                 case 3:
                     System.out.println();
@@ -101,7 +101,7 @@ public class matriks {
                     if (kolom1 != baris2) {
                         System.out.println(
                                 "operasi tidak dapat dilakukan. Jumlah kolom matriks1 harus sama dengan jumlah baris matriks2.");
-                        return;
+                        break;
                     }
                     matriks1 = new int[baris1][kolom1];
                     matriks2 = new int[baris2][kolom2];
@@ -139,12 +139,12 @@ public class matriks {
                     input(sc, matriks2);
 
                     System.out.println("Transpose matriks pertama:");
-                    double[][] transpose1 = transposeMatrix(matriks1);
-                    printHasil(transpose1);
+                    transposeMatrix(matriks1);
+                    printHasil(matriksHasil);
 
                     System.out.println("Transpose matriks kedua:");
-                    double[][] transpose2 = transposeMatrix(matriks2);
-                    printHasil(transpose2);
+                    transposeMatrix(matriks2);
+                    printHasil(matriksHasil);
                     break;
                 default:
                     System.out.println("Pilihan tidak valid!");
@@ -163,25 +163,23 @@ public class matriks {
         return matriks;
     }
 
-    public static double[][] addMatrices(int[][] matrix1, int[][] matrix2) {
+    public static void addMatrices(int[][] matrix1, int[][] matrix2) {
         matriksHasil = new double[matrix1.length][matrix1[0].length];
         for (int i = 0; i < matrix1.length; i++) {
             for (int j = 0; j < matrix1[i].length; j++) {
                 matriksHasil[i][j] = matrix1[i][j] + matrix2[i][j];
             }
         }
-        return matriksHasil;
     }
 
     // Fungsi untuk pengurangan
-    public static double[][] subtractMatrices(int[][] matrix1, int[][] matrix2) {
+    public static void subtractMatrices(int[][] matrix1, int[][] matrix2) {
         matriksHasil = new double[matrix1.length][matrix1[0].length];
         for (int i = 0; i < matrix1.length; i++) {
             for (int j = 0; j < matrix1[i].length; j++) {
                 matriksHasil[i][j] = matrix1[i][j] - matrix2[i][j];
             }
         }
-        return matriksHasil;
     }
 
     public static void perkalian(int[][] matriks1, int[][] matriks2, Scanner sc) {
@@ -298,14 +296,13 @@ public class matriks {
     }
 
     // Fungsi untuk transpose matriks
-    public static double[][] transposeMatrix(int[][] matrix) {
+    public static void transposeMatrix(int[][] matrix) {
         matriksHasil = new double[matrix[0].length][matrix.length];
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 matriksHasil[j][i] = matrix[i][j];
             }
         }
-        return matriksHasil;
     }
 
     public static void printHasil(double[][] matriksHasil) {
