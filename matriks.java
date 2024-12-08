@@ -82,7 +82,7 @@ public class matriks {
                     System.out.println("Masukkan elemen matriks kedua:");
                     input(sc, matriks2);
 
-                    System.out.println("Hasil penjumlahan pengurangan:");
+                    System.out.println("Hasil pengurangan matriks:");
                     subtractMatrices(matriks1, matriks2);
                     printHasil(matriksHasil);
                     break;
