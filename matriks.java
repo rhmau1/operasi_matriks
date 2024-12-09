@@ -307,8 +307,9 @@ public class matriks {
 
     public static void printHasil(double[][] matriksHasil) {
         for (int i = 0; i < matriksHasil.length; i++) {
+            System.out.print("|\t");
             for (int j = 0; j < matriksHasil[0].length; j++) {
-                System.out.print(matriksHasil[i][j] + " ");
+                System.out.print(matriksHasil[i][j] + "\t|\t");
             }
             System.out.println();
         }
